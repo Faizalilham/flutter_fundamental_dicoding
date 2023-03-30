@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fundamental_submission/app/model/list_restaurant.dart';
 import 'package:fundamental_submission/app/model/response_detail.dart';
+import 'package:fundamental_submission/app/model/response_search_restaurant.dart';
 
 import 'package:fundamental_submission/app/theme/color.dart';
 
@@ -19,12 +20,20 @@ class ApiService {
 
   static Future<ResponseDetailRestaurant> getDetailRestaurants(
       String id) async {
-    final response =
-        await http.get(Uri.parse("${baseUrl}detail/rqdv5juczeskfw1e867"));
+    final response = await http.get(Uri.parse("${baseUrl}detail/$id"));
     if (response.statusCode == 200) {
       return ResponseDetailRestaurant.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load list restaurants');
+      throw Exception('Failed to load detail restaurants');
+    }
+  }
+
+  static Future<ResponseSearchRestaurant> getResultSearch(String query) async {
+    final response = await http.get(Uri.parse("${baseUrl}search?q=$query"));
+    if (response.statusCode == 200) {
+      return ResponseSearchRestaurant.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load search restaurants');
     }
   }
 }

@@ -25,7 +25,7 @@ class HomeView extends GetView<HomeController> {
         padding: const EdgeInsets.all(defaultPadding),
         child: Column(
           children: [
-            const SearchField(),
+            SearchField(),
             Responsive(
               mobile: ListRestaurant(), 
               tablet: CardGridView(crossAxisCount:  3),

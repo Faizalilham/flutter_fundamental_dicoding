@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/customerReviews/bindings/customer_reviews_binding.dart';
+import '../modules/customerReviews/views/customer_reviews_view.dart';
 import '../modules/detail/bindings/detail_binding.dart';
 import '../modules/detail/views/detail_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -22,6 +24,11 @@ class AppPages {
       name: _Paths.DETAIL,
       page: () => const DetailView(),
       binding: DetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.CUSTOMER_REVIEWS,
+      page: () => CustomerReviewsView(),
+      binding: CustomerReviewsBinding(),
     ),
   ];
 }

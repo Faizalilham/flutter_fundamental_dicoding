@@ -34,7 +34,12 @@ class CardGridView extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   var restaurant = controller.listRestaurant[index];
-                  return CardGridRestaurant(restaurant: restaurant);
+                  return CardGridRestaurant(
+                    restaurant: restaurant,
+                    id: (String id) {
+                      controller.moveToDetail(id);
+                    },
+                  );
                 }));
       }
     });

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:fundamental_submission/app/modules/detail/bindings/detail_binding.dart';
 
 import 'package:fundamental_submission/app/theme/color.dart';
 

@@ -1,4 +1,5 @@
-import 'package:fundamental_submission/app/model/DetailRestaurant.dart';
+
+import 'package:fundamental_submission/app/model/detail_restaurant.dart';
 
 class ResponseDetailRestaurant {
   bool error;

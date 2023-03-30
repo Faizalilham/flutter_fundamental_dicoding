@@ -1,4 +1,6 @@
-import 'package:fundamental_submission/app/model/Menu.dart';
+
+
+import 'package:fundamental_submission/app/model/menu.dart';
 
 class DetailRestaurant {
   String id;
@@ -27,17 +29,18 @@ class DetailRestaurant {
   factory DetailRestaurant.fromJson(Map<String, dynamic> json) {
     return DetailRestaurant(
       id: json["id"],
-      name: json["name"],
-      description: json["description"],
-      pictureId: json["pictureId"],
-      city: json["city"],
-      address: json["address"],
+      name: json["name"] ?? "",
+      description: json["description"] ?? "",
+      city: json["city"] ?? "",
+      address: json["address"] ?? "",
+      pictureId: json["pictureId"] ?? "",
       categories: List<Categories>.from((json["categories"] as List)
           .map((datas) => Categories.fromJson(datas))),
       menus: Menus.fromJson(json["menus"]),
       rating: json["rating"],
-      customerReviews: List<CustomerReviews>.from((json["categories"] as List)
-          .map((datas) => CustomerReviews.fromJson(datas))),
+      customerReviews: List<CustomerReviews>.from(
+          (json["customerReviews"] as List)
+              .map((datas) => CustomerReviews.fromJson(datas))),
     );
   }
 }
@@ -61,7 +64,10 @@ class CustomerReviews {
       {required this.name, required this.review, required this.date});
 
   factory CustomerReviews.fromJson(Map<String, dynamic> json) {
+    print("$json");
     return CustomerReviews(
-        name: json["name"], review: json["review"], date: json["date"]);
+        name: json["name"],
+        review: json["review"] ?? "",
+        date: json["date"] ?? "");
   }
 }
