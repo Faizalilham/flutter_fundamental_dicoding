@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fundamental_submission/app/data/api_service.dart';
 import 'package:fundamental_submission/app/model/detail_restaurant.dart';
 import 'package:fundamental_submission/app/modules/customerReviews/bindings/customer_reviews_binding.dart';
@@ -15,6 +17,7 @@ class DetailController extends GetxController {
   List<String> listDrinks = [];
   static List<CustomerReviews> customerReviews = [];
   RxBool isLoading = true.obs;
+  RxString message = "".obs;
 
   @override
   void onInit() {
@@ -28,23 +31,30 @@ class DetailController extends GetxController {
     try {
       isLoading(true);
       var datas = await ApiService.getDetailRestaurants(id);
-      if (datas != null) {
-        detailRestaurant = datas.restaurant;
-        datas.restaurant.categories.forEach((x) {
-          listCategories.add(x.name);
-        });
-        datas.restaurant.menus.foods.forEach((x) {
-          listFoods.add(x.name);
-        });
-        datas.restaurant.menus.drinks.forEach((x) {
-          listDrinks.add(x.name);
-        });
-        print(" suu ${datas.restaurant.customerReviews}");
+      final result = await InternetAddress.lookup('example.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        isLoading(false);
+        message.value = "";
+        if (datas != null) {
+          detailRestaurant = datas.restaurant;
+          datas.restaurant.categories.forEach((x) {
+            listCategories.add(x.name);
+          });
+          datas.restaurant.menus.foods.forEach((x) {
+            listFoods.add(x.name);
+          });
+          datas.restaurant.menus.drinks.forEach((x) {
+            listDrinks.add(x.name);
+          });
+          print(" suu ${datas.restaurant.customerReviews}");
 
-        customerReviews.addAll(datas.restaurant.customerReviews);
-        print("${customerReviews.length}");
+          customerReviews.addAll(datas.restaurant.customerReviews);
+          print("${customerReviews.length}");
+        }
       }
-    } finally {
+    } catch (e) {
+      message.value = "$e";
+      print(message.value);
       isLoading(false);
     }
   }
